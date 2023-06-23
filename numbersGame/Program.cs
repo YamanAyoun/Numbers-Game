@@ -8,14 +8,6 @@
             {
                 StartSequence();// Call the StartSequence method 
             }
-            catch (FormatException ex)
-            {
-                Console.WriteLine("Invalid input: " + ex.Message);// Handle FormatException if the input invalid format
-            }
-            catch (OverflowException ex)
-            {
-                Console.WriteLine("Number is too large or too small: " + ex.Message);//if number is too large or too small
-            }
             catch (Exception ex)
             {
                 Console.WriteLine("Something wrong: " + ex.Message);
@@ -28,26 +20,36 @@
 
         static void StartSequence()
         {
-            Console.WriteLine("Welcome to my game! Let's do some math!");
-            Console.WriteLine("Please enter a number greater than zero");
-            int size = Convert.ToInt32(Console.ReadLine());// Convert input to integer
+            try {
+                Console.WriteLine("Welcome to my game! Let's do some math!");
+                Console.WriteLine("Please enter a number greater than zero");
+                int size = Convert.ToInt32(Console.ReadLine());// Convert input to integer
 
-            int[] numbers = new int[size];
-            numbers = Populate(numbers);// Call the Populate method
+                int[] numbers = new int[size];
+                numbers = Populate(numbers);// Call the Populate method
 
-            int sum = GetSum(numbers);// Call the GetSum method
-            int product = GetProduct(numbers, sum);// Call the GetProduct method
-            decimal quotient = GetQuotient(product);// Call the GetQuotient method
+                int sum = GetSum(numbers);// Call the GetSum method
+                int product = GetProduct(numbers, sum);// Call the GetProduct method
+                decimal quotient = GetQuotient(product);// Call the GetQuotient method
 
-            Console.WriteLine($"Your array is size = {numbers.Length}");
-            
-            /*for (int i = 0; i <= numbers.Length; i++)
+                Console.WriteLine($"Your array is size = {numbers.Length}");
+
+                /*for (int i = 0; i <= numbers.Length; i++)
+                {
+                    Console.WriteLine($"The numbers in the array are = {numbers[i]}");
+                };*/
+                Console.WriteLine($"The Sum of the array is: {sum}");
+                Console.WriteLine($"Product: {product}");
+                Console.WriteLine($"Quotient: {quotient}");
+            }
+            catch (FormatException ex)
             {
-                Console.WriteLine($"The numbers in the array are = {numbers[i]}");
-            };*/
-            Console.WriteLine($"The Sum of the array is: {sum}");
-            Console.WriteLine($"Product: {product}");
-            Console.WriteLine($"Quotient: {quotient}");
+                Console.WriteLine(ex.Message);
+            }
+            catch (OverflowException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         static int[] Populate(int[] numbers)
